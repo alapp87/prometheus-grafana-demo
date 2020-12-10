@@ -120,9 +120,6 @@ podPortName: grafana
 ##
 service:
   type: ClusterIP
-  # loadBalancerSourceRanges:
-  #   - 45.17.197.126/32
-  # type: ClusterIP
   port: 80
   targetPort: 3000
     # targetPort: 4181 To be used with a proxy extraContainer
@@ -157,29 +154,28 @@ hostAliases: []
   #     - "my.host.com"
 
 ingress:
-  enabled: true
+  enabled: false
   # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   # Values can be templated
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
-    kubernetes.io/tls-acme: "true"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
   labels: {}
   path: /
   hosts:
-    - grafana.dmilangcp.xyz
+    - chart-example.local
   ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
   extraPaths: []
   # - path: /*
   #   backend:
   #     serviceName: ssl-redirect
   #     servicePort: use-annotation
-  tls:
-   - secretName: grafana-dmilangcp-tls
-     hosts:
-       - grafana.dmilangcp.xyz
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 resources: {}
 #  limits:
@@ -276,7 +272,7 @@ initChownData:
 
 # Administrator credentials when not using an existing secret (see below)
 adminUser: admin
-adminPassword: GEHQUj84.CwjCj6yn
+# adminPassword: strongpassword
 
 # Use an existing secret for the admin user.
 admin:
@@ -388,15 +384,15 @@ plugins: []
 ## Configure grafana datasources
 ## ref: http://docs.grafana.org/administration/provisioning/#datasources
 ##
-datasources:
- datasources.yaml:
-   apiVersion: 1
-   datasources:
-   - name: Prometheus
-     type: prometheus
-     url: http://prometheus-prometheus-server
-     access: proxy
-     isDefault: true
+datasources: {}
+#  datasources.yaml:
+#    apiVersion: 1
+#    datasources:
+#    - name: Prometheus
+#      type: prometheus
+#      url: http://prometheus-prometheus-server
+#      access: proxy
+#      isDefault: true
 #    - name: CloudWatch
 #        type: cloudwatch
 #        access: proxy

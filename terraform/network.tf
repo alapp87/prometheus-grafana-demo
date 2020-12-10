@@ -27,14 +27,32 @@ resource "google_compute_address" "internal_with_subnet_and_address" {
   region       = "us-central1"
 }
 
-# resource "google_compute_address" "external_ip_argocd" {
-#   name         = "argocd-external-address"
-#   address_type = "EXTERNAL"
-# }
+resource "google_compute_address" "external_ip_ingress" {
+  name         = "ingress-external-address"
+  address_type = "EXTERNAL"
+}
 
-# output external_ip_argocd {
-#   value       = google_compute_address.external_ip_argocd.address
-#   sensitive   = false
-#   description = "description"
-#   depends_on  = []
-# }
+
+
+data "google_dns_managed_zone" "env_dns_zone" {
+  name = "dmilangcp-xyz"
+}
+
+resource "google_dns_record_set" "dns_grafana" {
+  name = "grafana.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
+  type = "A"
+  ttl  = 300
+
+  managed_zone = data.google_dns_managed_zone.env_dns_zone.name
+
+  rrdatas = [google_compute_address.external_ip_ingress.address]
+}
+
+
+# grafana.dmilangcp.xyz
+output external_ip_ingress {
+  value       = google_compute_address.external_ip_ingress.address
+  sensitive   = false
+  description = "description"
+  depends_on  = []
+}
