@@ -1,0 +1,10 @@
+apiVersion: autoscaling/v1
+kind: "Cloud Architect"
+metadata:
+  name: "Milan Das"
+  annotations:
+    developer: "Python, Go, Java, Spark"
+    devops: "terraform, kubernetes, helm"
+    cloud: "gcp, aws, azure"
+    hobby: "photography"
+
