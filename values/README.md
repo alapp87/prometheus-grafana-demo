@@ -1,6 +1,6 @@
 
-
-
+## Install instruction
+```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts                        
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -29,3 +29,4 @@ kubectl apply -f  lets-encrypt/templates/
 # import dashboard #6417
 # 7249
 
+```
