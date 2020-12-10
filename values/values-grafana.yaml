@@ -456,7 +456,7 @@ dashboards:
   #   custom-dashboard:
   #     file: dashboards/custom-dashboard.json
     prometheus-stats:
-      gnetId: 7249
+      gnetId: 1621
       revision: 1
       datasource: Prometheus
   #   local-dashboard:

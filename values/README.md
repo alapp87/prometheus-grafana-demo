@@ -35,5 +35,6 @@ helm upgrade --install  grafana grafana/grafana --namespace grafana --create-nam
 
 # import dashboard #6417
 # 7249
+# 1621
 
 ```
