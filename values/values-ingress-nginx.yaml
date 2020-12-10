@@ -360,8 +360,8 @@ controller:
     externalIPs: []
 
     # loadBalancerIP: ""
-    loadBalancerSourceRanges:
-      - 45.17.197.126/32
+    # loadBalancerSourceRanges:
+    #   - 45.17.197.126/32
 
     enableHttp: true
     enableHttps: true
