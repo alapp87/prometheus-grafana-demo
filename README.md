@@ -1,9 +1,25 @@
-# gitops-demo
+## Install infra
 ```
-helm repo add argo https://argoproj.github.io/argo-helm
-helm upgrade --install argo-cd argo/argo-cd -f argo-cd/values.yaml --namespace  argo-cd --create-namespace
+scripts/createInfra.sh
+
 ```
 
+## Install nginx cert-manager lets-encrypt
+```
+helm upgrade --install  ingress-nginx ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx --create-namespace \
+    -f  values/values-ingress-nginx.yaml --set service.loadBalancerIP="x.x.x.x"
+
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager --create-namespace \
+  --version v1.1.0 \
+  --set installCRDs=true
+
+kubectl apply -f  lets-encrypt/templates/
+
+
+```
 ## kube-prometheus-stack
 ```
 helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
