@@ -359,7 +359,7 @@ controller:
     ##
     externalIPs: []
 
-    loadBalancerIP: "34.72.0.134"
+    loadBalancerIP: "35.223.121.39"
     # loadBalancerSourceRanges:
     #   - 45.17.197.126/32
 
